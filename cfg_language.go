@@ -15,9 +15,9 @@ func LanguageISO2() *Config {
 
 		validation_languages_map = Languages()
 	}
-		
+
 	return NewConfig(
-		&Language{},
+		"EN",
 		func (req http.Request, param string) (status *http.Status, _ interface{}) {
 
 			if len(param) != 2 { return req.Respond(400, "PARAM IS LONGER THAN 2 CHARS"), nil }
