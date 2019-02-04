@@ -280,7 +280,13 @@ func parseCountry(s string) *Country {
 	return &Country{name, code, lat, lng, lang}
 }
 
+var validation_countries_map map[string]*Country
+
 func Countries() map[string]*Country {
+
+	if validation_countries_map != nil {
+		return validation_countries_map
+	}
 
 	m := map[string]*Country{}
 
@@ -292,6 +298,7 @@ func Countries() map[string]*Country {
 
 	}
 
+	validation_countries_map = m
 	//fmt.Println(m)
 
 	return m

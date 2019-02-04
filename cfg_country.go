@@ -7,17 +7,11 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-var validation_countries_map map[string]*Country
-
 // Returns a validation object that checks to see if it can resolve to a country struct
 func CountryISO2() *Config {
 
 	min := 2.0
 	max := 2.0
-
-	if validation_countries_map == nil {
-		validation_countries_map = Countries()
-	}
 
 	return NewConfig(
 		"US",
@@ -33,7 +27,7 @@ func CountryISO2() *Config {
 				return status, nil
 			}
 
-			country := validation_countries_map[s]
+			country := Countries()[s]
 
 			if country == nil { status = req.Respond(400, "COUNTRY NOT FOUND: "+s) }
 
@@ -60,7 +54,7 @@ func CountryISO2() *Config {
 				return
 			}
 
-			country := validation_countries_map[s]
+			country := Countries()[s]
 			if country == nil {
 				status = req.Respond(400, "COUNTRY NOT FOUND: "+s)
 				return

@@ -21,6 +21,7 @@ func TestCountryISO2(t *testing.T) {
 		"GBR": nil,
 		"US": success,
 		"USA": nil,
+		"null": nil,
 	}
 
 	vc := CountryISO2()
