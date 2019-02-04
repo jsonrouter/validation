@@ -27,19 +27,83 @@ func TestCountryISO2(t *testing.T) {
 
 	for test, result := range tests {
 
-		if status, _ := vc.PathFunction(req, test); (result == nil && status == nil) || (result != nil && status != nil) {
+		t.Run(
+			"TESTING COUNTRY: "+test,
+			func (t *testing.T) {
 
-			t.Error("FAILED: "+test)
-		}
+				status, value := vc.BodyFunction(req, test)
+				if status == nil {
+					if value == nil {
+						if result == nil {
+							t.Log("(FAILED AS REQUIRED)")
+							return
+						}
+						t.Errorf("INVALID COUNTRY AND STATUS VALUE: %v %v", value, status)
+						t.Fail()
+					}
+					c, ok := value.(*Country)
+					if ok {
+						if test != c.Code {
+							if result == nil {
+								t.Log("(FAILED AS REQUIRED)")
+							} else {
+								t.Errorf("INVALID COUNTRY VALUE: %v %v", value, status)
+								t.Fail()
+							}
+						}
+					}
+					return
+				}
+				if result == nil {
+					t.Log("(FAILED AS REQUIRED)")
+					return
+				}
+				t.Errorf("INVALID STATUS VALUE: %v", status)
+				t.Fail()
+				return
+			},
+		)
 
 	}
 
 	for test, result := range tests {
 
-		if status, _ := vc.BodyFunction(req, test); (result == nil && status == nil) || (result != nil && status != nil) {
+		t.Run(
+			"TESTING COUNTRY: "+test,
+			func (t *testing.T) {
 
-			t.Error("FAILED: "+test)
-		}
+				status, value := vc.BodyFunction(req, test)
+				if status == nil {
+					if value == nil {
+						if result == nil {
+							t.Log("(FAILED AS REQUIRED)")
+							return
+						}
+						t.Errorf("INVALID COUNTRY AND STATUS VALUE: %v %v", value, status)
+						t.Fail()
+					}
+					c, ok := value.(*Country)
+					if ok {
+						if test != c.Code {
+							if result == nil {
+								t.Log("(FAILED AS REQUIRED)")
+							} else {
+								t.Errorf("INVALID COUNTRY VALUE: %v %v", value, status)
+								t.Fail()
+							}
+						}
+					}
+					return
+				}
+				if result == nil {
+					t.Log("(FAILED AS REQUIRED)")
+					return
+				}
+				t.Errorf("INVALID STATUS VALUE: %v", status)
+				t.Fail()
+				return
+			},
+		)
 
 	}
 }

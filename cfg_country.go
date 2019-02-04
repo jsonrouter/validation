@@ -1,6 +1,7 @@
 package validation
 
 import (
+	"fmt"
 	"strings"
 	//
 	"github.com/jsonrouter/core/http"
@@ -15,9 +16,7 @@ func CountryISO2() *Config {
 	max := 2.0
 
 	if validation_countries_map == nil {
-
 		validation_countries_map = Countries()
-
 	}
 
 	return NewConfig(
@@ -42,7 +41,14 @@ func CountryISO2() *Config {
 		},
 		func (req http.Request, param interface{}) (status *http.Status, _ interface{}) {
 
-			s, ok := param.(string); if !ok { return nil, nil }
+			s, ok := param.(string)
+			if !ok {
+				status = req.Respond(
+					400,
+					fmt.Sprintf("COUNTRY PARAM NOT A STRING: %v", param),
+				)
+				return
+			}
 
 			status, s = checkString(
 				req,
@@ -51,14 +57,16 @@ func CountryISO2() *Config {
 				strings.TrimSpace(strings.ToUpper(s)),
 			)
 			if status != nil {
-				return status, nil
+				return
 			}
 
 			country := validation_countries_map[s]
+			if country == nil {
+				status = req.Respond(400, "COUNTRY NOT FOUND: "+s)
+				return
+			}
 
-			if country == nil { status = req.Respond(400, "COUNTRY NOT FOUND: "+s) }
-
-			return status, country
+			return nil, country
 		},
 		min,
 		max,

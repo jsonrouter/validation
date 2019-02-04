@@ -1,6 +1,8 @@
 package validation
 
 import 	(
+		//"fmt"
+		//
 		"strings"
 		)
 
@@ -289,6 +291,8 @@ func Countries() map[string]*Country {
 		m[c.Code] = c
 
 	}
+
+	//fmt.Println(m)
 
 	return m
 }

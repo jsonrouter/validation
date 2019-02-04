@@ -1,6 +1,7 @@
 package validation
 
 import (
+	"fmt"
 	//
 	"github.com/jsonrouter/core/http"
 )
@@ -9,14 +10,20 @@ func checkString(req http.Request, min, max float64, s string) (*http.Status, st
 
 	s = Sanitize(s)
 
-	length := float64(len(s))
+	length := len(s)
 
-	if length < min {
-		return req.Respond(400, ERR_RANGE_EXCEED+": min"), ""
+	if length < int(min) {
+		return req.Respond(
+			400,
+			fmt.Sprintf("%s: min (%d)", ERR_RANGE_EXCEED, length),
+		), ""
 	}
 
-	if length > max {
-		return req.Respond(400, ERR_RANGE_EXCEED+": max"), ""
+	if length > int(max) {
+		return req.Respond(
+			400,
+			fmt.Sprintf("%s: max (%d)", ERR_RANGE_EXCEED, length),
+		), ""
 	}
 
 	return nil, s
