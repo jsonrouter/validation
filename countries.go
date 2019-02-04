@@ -247,7 +247,7 @@ const 	(
 ,Uganda,UG,UGA,Africa,1.373333,32.290275,EN,,,,800,256,,,,
 ,Ukraine,UA,UKR,Russia and CIS,48.379433,31.165580,UK,,,,804,380,,,,
 ,United States,US,USA,North America,37.090240,-95.712891,EN,,,,840,1,,,,
-,United States Minor Outlying Islands,UM,UMI,North America,,,EN,,,,581,1,,,,
+,United States Minor Outlying Islands,UM,UMI,North America,19.2823,166.6470,EN,,,,581,1,,,,
 ,Uruguay,UY,URY,South America,-32.522779,-55.765835,ES,,,,858,598,,,,
 ,Uzbekistan,UZ,UZB,Russia and CIS,41.377491,64.585262,UZ,,,,860,998,,,,
 ,Venezuela,VE,VEN,South America,6.423750,-66.58973,ES,,,,862,58,,,,
@@ -276,11 +276,11 @@ func parseCountry(s string) *Country {
 	code := strings.TrimSpace(cell[2])
 	lat, err := strconv.ParseFloat(strings.TrimSpace(cell[5]), 64)
 	if err != nil {
-		panic("FAILED TO PARSE COUNTRY LAT FOR "+s)
+		panic("FAILED TO PARSE COUNTRY LAT FOR " + s + " (" + err.Error() + ")")
 	}
 	lng, err := strconv.ParseFloat(strings.TrimSpace(cell[6]), 64)
 	if err != nil {
-		panic("FAILED TO PARSE COUNTRY LNG FOR "+s)
+		panic("FAILED TO PARSE COUNTRY LNG FOR " + s + " (" + err.Error() + ")")
 	}
 	lang := strings.TrimSpace(cell[7])
 
