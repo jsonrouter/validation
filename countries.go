@@ -1,10 +1,11 @@
 package validation
 
 import 	(
-		//"fmt"
-		//
-		"strings"
-		)
+	//"fmt"
+	//
+	"strings"
+	"strconv"
+)
 
 const 	(
 		COUNTRY_CSV = `POPULATED,COUNTRY,A2 (ISO),A3 (UN),REGION,LATITUDE,LONGITUDE,OFFICIAL LANGUAGE,nada,RECOGNISED LANGUAGES,ISO 639-1 CODES,NUM (UN),DIALING CODE,COMMENT,NUMBER OF PHOTOS FOR FRONTPAGE,TRIGGERING WHEN SWITCHING COUNTRY,TRIGGERING BASED ON IP
@@ -260,11 +261,11 @@ const 	(
 		)
 
 type Country struct {
-	Name string 				`json:"name"`
-	Code string 				`json:"code"`
-	Lat string 					`json:"lat"`
-	Lng string 					`json:"lng"`
-	Lang string 				`json:"lang"`
+	Name string `json:"name"`
+	Code string `json:"code"`
+	Lat float64 `json:"lat"`
+	Lng float64 `json:"lng"`
+	Lang string `json:"lang"`
 }
 
 func parseCountry(s string) *Country {
@@ -273,8 +274,14 @@ func parseCountry(s string) *Country {
 
 	name := strings.TrimSpace(cell[1])
 	code := strings.TrimSpace(cell[2])
-	lat := strings.TrimSpace(cell[5])
-	lng := strings.TrimSpace(cell[6])
+	lat, err := strconv.ParseFloat(strings.TrimSpace(cell[5]), 64)
+	if err != nil {
+		panic("FAILED TO PARSE COUNTRY LAT FOR "+s)
+	}
+	lng, err := strconv.ParseFloat(strings.TrimSpace(cell[6]), 64)
+	if err != nil {
+		panic("FAILED TO PARSE COUNTRY LNG FOR "+s)
+	}
 	lang := strings.TrimSpace(cell[7])
 
 	return &Country{name, code, lat, lng, lang}
