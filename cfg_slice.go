@@ -5,7 +5,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object that checks for a slice of integers
+// Slice returns a validation object that checks for a slice of integers
 func Slice(vc *Config) *Config {
 
 	return NewConfig(
