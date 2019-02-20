@@ -1,6 +1,7 @@
 package validation
 
 import (
+	"math"
 	"strconv"
 	//
 	"github.com/jsonrouter/core/http"
@@ -31,7 +32,13 @@ func Float64(ranges ...int) *Config {
 
 			if min + max == 0 { return nil, val }
 
-			if (val > max || val < min) { status = req.Respond(400, ERR_RANGE_EXCEED) }
+			if (val > max || val < min) {
+				status = req.Respond(400, ERR_RANGE_EXCEED)
+			}
+
+			if math.IsNaN(val) {
+				status = req.Respond(400, ERR_RANGE_NAN)
+			}
 
 			return status, val
 		},
@@ -42,6 +49,10 @@ func Float64(ranges ...int) *Config {
 			if min + max == 0 { return nil, val }
 
 			if (val > max || val < min) { status = req.Respond(400, ERR_RANGE_EXCEED) }
+
+			if math.IsNaN(val) {
+				status = req.Respond(400, ERR_RANGE_NAN)
+			}
 
 			return status, val
 		},
