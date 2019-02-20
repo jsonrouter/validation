@@ -5,7 +5,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object that allows any value
+// ArrayString returns a validation object that allows any value
 func ArrayString() *Config {
 
 	return NewConfig(

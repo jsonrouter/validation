@@ -5,7 +5,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object that checks for a bool which parses correctly
+// Bool returns a validation object that checks for a bool which parses correctly
 func Bool() *Config {
 
 	return NewConfig(

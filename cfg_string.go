@@ -29,7 +29,7 @@ func checkString(req http.Request, min, max float64, s string) (*http.Status, st
 	return nil, s
 }
 
-// Returns a validation object that checks for a string with a length within optional range
+// String returns a validation object that checks for a string with a length within optional range
 func String(min, max float64) *Config {
 
 	return NewConfig(

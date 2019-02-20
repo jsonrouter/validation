@@ -28,7 +28,7 @@ func validatePhoneNumber(req http.Request, countryCode, number string) (*http.St
 	return nil, format
 }
 
-// Returns a validation object that checks to see if a valid phone number is provided
+// PhoneNumber returns a validation object that checks to see if a valid phone number is provided
 func PhoneNumber(countryCode string) *Config {
 		
 	return NewConfig(

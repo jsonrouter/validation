@@ -7,7 +7,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object that checks to see if it can resolve to a country struct
+// CountryISO2 returns a validation object that checks to see if it can resolve to a country struct
 func CountryISO2() *Config {
 
 	min := 2.0

@@ -6,7 +6,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object which checks for valid username
+// Username returns a validation object which checks for valid username
 func Username(min, max float64) *Config {
 
 	return NewConfig(

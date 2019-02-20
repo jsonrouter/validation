@@ -6,7 +6,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object which checks for valid time
+// SQLTimestamp returns a validation object which checks for valid time
 func SQLTimestamp() *Config {
 
 	return NewConfig(
@@ -22,7 +22,7 @@ func SQLTimestamp() *Config {
 	)
 }
 
-// Returns a validation object which outputs the current time
+// Now returns a validation object which outputs the current time
 func Now() *Config {
 
 	return NewConfig(
@@ -38,7 +38,7 @@ func Now() *Config {
 	)
 }
 
-// Returns a validation object which checks for valid time like 2017-06-23T00:00:00.000Z
+// Time returns a validation object which checks for valid time like 2017-06-23T00:00:00.000Z
 func Time(layout string) *Config {
 
 	return NewConfig(

@@ -51,7 +51,7 @@ type Config struct {
 	DescriptionValue string `json:"description"`
 }
 
-// Adds a default value to the config
+// Default adds a default value to the config
 func (vc *Config) Default(x interface{}) *Config {
 	if reflect.TypeOf(x).String() == vc.Type {
 		vc.DefaultValue = x
@@ -61,25 +61,25 @@ func (vc *Config) Default(x interface{}) *Config {
 	return vc
 }
 
-// Adds a description to the config
+// Description adds a description to the config
 func (vc *Config) Description(x string) *Config {
 	vc.DescriptionValue = x
 	return vc
 }
 
-// Adds a description to the config
+// Summary adds a description to the config
 func (vc *Config) Summary(x string) *Config {
 	vc.SummaryValue = x
 	return vc
 }
 
-// Signifies that the field is 'required'
+// Required signifies that the field is 'required'
 func (vc *Config) Required() *Config {
 	vc.RequiredValue = true
 	return vc
 }
 
-// Returns the first key associated with the path parameter
+// Key returns the first key associated with the path parameter
 func (vc *Config) Key() string {
 	return vc.Keys[0]
 }
@@ -117,7 +117,7 @@ func NewConfig(validationType interface{}, pathFunction PathValidationFunction, 
 
 type JSON struct {}
 
-// Returns a validation object which checks for (in)valid json
+// Json returns a validation object which checks for (in)valid json
 func Json() *Config {
 
 	return NewConfig(
@@ -137,7 +137,7 @@ func Json() *Config {
 
 type URL struct{}
 
-// Returns a validation object which checks for valid url
+// Url returns a validation object which checks for valid url
 func Url() *Config {
 
 	return NewConfig(
@@ -163,7 +163,7 @@ func Url() *Config {
 	)
 }
 
-// Returns a validation object for request body that checks a property to see if it's an array
+// StringInterfaceArray returns a validation object for request body that checks a property to see if it's an array
 func StringInterfaceArray() *Config {
 
 	return NewConfig(

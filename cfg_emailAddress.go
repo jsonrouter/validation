@@ -7,7 +7,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object which checks for valid email address
+// EmailAddress returns a validation object which checks for valid email address
 func EmailAddress() *Config {
 
 	min := 6.0

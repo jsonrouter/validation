@@ -6,7 +6,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object which ensures string is whitelisted
+// StringSet returns a validation object which ensures string is whitelisted
 func StringSet(set ...string) *Config {
 
 	min := 0.0

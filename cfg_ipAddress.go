@@ -14,7 +14,7 @@ func (ipv4 IPv4) String() string {
 	return fmt.Sprintf("%v.%v.%v.%v", ipv4[0], ipv4[1], ipv4[2], ipv4[3])
 }
 
-// Returns a validation object that checks for a string with a length within optional range
+// IPv4Address returns a validation object that checks for a string with a length within optional range
 func IPv4Address() *Config {
 
 	min := 7.0
