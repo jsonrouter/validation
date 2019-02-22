@@ -7,7 +7,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object that checks for a float64 which parses correctly
+// Float64 returns a validation object that checks for a float64 which parses correctly
 func Float64(ranges ...int) *Config {
 
 	var min float64

@@ -5,7 +5,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object that checks for a string with exact length
+// StringExact returns a validation object that checks for a string with exact length
 func StringExact(max float64) *Config {
 
 	min := max

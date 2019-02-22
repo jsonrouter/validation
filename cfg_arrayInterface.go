@@ -4,7 +4,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object for request body that checks a property to see if it's an array
+// ArrayInterface returns a validation object for request body that checks a property to see if it's an array
 func ArrayInterface() *Config {
 
 	return NewConfig(

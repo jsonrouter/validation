@@ -4,7 +4,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object for request body that checks a property to see if it's an object
+// MapStringInterface returns a validation object for request body that checks a property to see if it's an object
 func MapStringInterface() *Config {
 
 	return NewConfig(

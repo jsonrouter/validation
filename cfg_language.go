@@ -8,7 +8,7 @@ import (
 
 var validation_languages_map map[string]*Language
 
-// Returns a validation object that checks to see if it can resolve to a country struct
+// LanguageISO2 returns a validation object that checks to see if it can resolve to a country struct
 func LanguageISO2() *Config {
 
 	if validation_languages_map == nil {

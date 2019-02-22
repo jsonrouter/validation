@@ -6,7 +6,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object which checks for delimiter-separated string like CSV
+// StringSplit returns a validation object which checks for delimiter-separated string like CSV
 func StringSplit(delimiter string) *Config {
 
 	min := 0.0

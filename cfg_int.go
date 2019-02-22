@@ -6,7 +6,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object that checks for an int which parses correctly
+// Int returns a validation object that checks for an int which parses correctly
 func Int() *Config {
 
 	return NewConfig(

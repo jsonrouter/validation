@@ -6,7 +6,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object that checks for a valid UUID version 4
+// UUIDv4 returns a validation object that checks for a valid UUID version 4
 func UUIDv4() *Config {
 
 	min := 36.0

@@ -6,7 +6,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object which checks for password
+// PasswordWeak returns a validation object which checks for password
 func PasswordWeak() *Config {
 
 	min := PASSWORD_MIN_LENGTH

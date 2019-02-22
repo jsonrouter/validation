@@ -6,7 +6,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object that checks for an int64 which parses correctly
+// Int64 returns a validation object that checks for an int64 which parses correctly
 func Int64() *Config {
 
 	return NewConfig(

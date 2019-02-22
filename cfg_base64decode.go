@@ -6,7 +6,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object which checks for valid username
+// Base64Decode returns a validation object which checks for valid username
 func Base64Decode() *Config {
 
 	return NewConfig(

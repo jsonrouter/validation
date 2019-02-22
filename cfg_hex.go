@@ -6,7 +6,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Returns a validation object that checks for a hex string with a length within optional range
+// Hex returns a validation object that checks for a hex string with a length within optional range
 func Hex(min, max float64) *Config {
 
 	config := NewConfig(
