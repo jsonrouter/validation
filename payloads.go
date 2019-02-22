@@ -8,10 +8,9 @@ type Patch map[string]*Config
 
 type Payload map[string]*Config
 
+// WithFields does something, probably deprecated.
 func (payload Payload) WithFields(fields Payload) Payload {
-
   for k, v := range payload { fields[k] = v }
-
   return fields
 }
 

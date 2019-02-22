@@ -29,7 +29,7 @@ func TestCountryISO2(t *testing.T) {
 	for test, result := range tests {
 
 		t.Run(
-			"TESTING COUNTRY: "+test,
+			"TESTING alpha2 COUNTRY: "+test,
 			func (t *testing.T) {
 
 				status, value := vc.BodyFunction(req, test)
@@ -44,7 +44,7 @@ func TestCountryISO2(t *testing.T) {
 					}
 					c, ok := value.(*Country)
 					if ok {
-						if test != c.Code {
+						if test != c.Alpha2Code {
 							if result == nil {
 								t.Log("(FAILED AS REQUIRED)")
 							} else {
@@ -70,7 +70,7 @@ func TestCountryISO2(t *testing.T) {
 	for test, result := range tests {
 
 		t.Run(
-			"TESTING COUNTRY: "+test,
+			"TESTING alpha2 COUNTRY: "+test,
 			func (t *testing.T) {
 
 				status, value := vc.BodyFunction(req, test)
@@ -85,7 +85,7 @@ func TestCountryISO2(t *testing.T) {
 					}
 					c, ok := value.(*Country)
 					if ok {
-						if test != c.Code {
+						if test != c.Alpha2Code {
 							if result == nil {
 								t.Log("(FAILED AS REQUIRED)")
 							} else {

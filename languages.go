@@ -11,6 +11,7 @@ func Lang(code, native string, rev bool) *Language { return &Language{code, nati
 
 var languageMap map[string]*Language
 
+// Languages returns a map of alpha-2 lanugage codes to language structs.
 func Languages() map[string]*Language {
 
 	return map[string]*Language{

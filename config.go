@@ -4,7 +4,6 @@ import 	(
 	"regexp"
 	"reflect"
 	"strings"
-	"net/url"
 	"encoding/hex"
 	//
 	"golang.org/x/crypto/sha3"
@@ -12,14 +11,17 @@ import 	(
 	"github.com/jsonrouter/core/http"
 )
 
+// IsAlpha checkes whether a string is alphabetic.
 func IsAlpha(s string) (bool, string) {
 	return regexp.MustCompile("[a-zA-Z]").MatchString(s), strings.ToLower(s)
 }
 
+// IsAlphanumeric checks if a string is alphanumeric.
 func IsAlphanumeric(s string) (bool, string) {
 	return regexp.MustCompile("[a-zA-Z0-9_]").MatchString(s), strings.ToLower(s)
 }
 
+// Hash256 is a tool to exec the SHA25 on strings, taking a string input, and outputting hex.
 func Hash256(input string) string {
 
 	b := make([]byte, 64)
@@ -84,16 +86,19 @@ func (vc *Config) Key() string {
 	return vc.Keys[0]
 }
 
+// KeyJoin joins the keys that are accocuated to a validation config, and concatonates them.
 func (vc *Config) KeyJoin(delim string) string {
 
 	return strings.Join(vc.Keys, delim)
 }
 
+// Expecting constructs a string that indicates what the required values were.
 func (vc *Config) Expecting() string {
 
 	return "expecting: " + vc.Type + " for keys: " + vc.KeyJoin(", ")
 }
 
+// NewConfig creates a new validation config with the supplied parameters.
 func NewConfig(validationType interface{}, pathFunction PathValidationFunction, bodyFunction BodyValidationFunction, ranges ...float64) *Config {
 
 	cfg := &Config{
@@ -106,7 +111,6 @@ func NewConfig(validationType interface{}, pathFunction PathValidationFunction, 
 	switch len(ranges) {
 
 		case 2:
-
 			cfg.Min = ranges[0]
 			cfg.Max = ranges[1]
 
@@ -119,69 +123,14 @@ type JSON struct {}
 
 // Json returns a validation object which checks for (in)valid json
 func Json() *Config {
-
 	return NewConfig(
 		JSON{},
 		func (req http.Request, param string) (*http.Status, interface{}) {
-
 			return nil, param
 		},
 		func (req http.Request, param interface{}) (*http.Status, interface{}) {
-
 			s, ok := param.(string); if !ok { return req.Respond(400, ERR_NOT_STRING), nil }
-
 			return nil, s
-		},
-	)
-}
-
-type URL struct{}
-
-// Url returns a validation object which checks for valid url
-func Url() *Config {
-
-	return NewConfig(
-		"",
-		func (req http.Request, param string) (*http.Status, interface{}) {
-
-      		param = strings.TrimSpace(param)
-
-			_, err := url.ParseRequestURI(param); if err != nil { return req.Respond(400, ERR_PARSE_URL), "" }
-
-			return nil, param
-		},
-		func (req http.Request, param interface{}) (*http.Status, interface{}) {
-
-			s, ok := param.(string); if !ok { return req.Respond(400, ERR_NOT_STRING), nil }
-
-      		s = strings.TrimSpace(strings.ToLower(s))
-
-			_, err := url.ParseRequestURI(s); if err != nil { return req.Respond(400, ERR_PARSE_URL), "" }
-
-			return nil, s
-		},
-	)
-}
-
-// StringInterfaceArray returns a validation object for request body that checks a property to see if it's an array
-func StringInterfaceArray() *Config {
-
-	return NewConfig(
-		[]string{},
-		nil,
-		func (req http.Request, param interface{}) (*http.Status, interface{}) {
-
-			a, ok := param.([]interface{}); if !ok { return req.Respond(400, ERR_NOT_ARRAY), nil }
-
-			list := make([]string, len(a))
-
-			for i, x := range a {
-
-				list[i], ok = x.(string); if !ok { return req.Respond(400, ERR_NOT_STRING), nil }
-
-			}
-
-			return nil, list
 		},
 	)
 }

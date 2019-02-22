@@ -293,6 +293,7 @@ func parseCountry(s string) *Country {
 var validation_countries_map_alpha2 map[string]*Country
 var validation_countries_map_alpha3 map[string]*Country
 
+// CountriesISO2 returns the map of alpha-2 codes to country structs.
 func CountriesISO2() map[string]*Country {
 	if validation_countries_map_alpha2 != nil {
 		return validation_countries_map_alpha2
@@ -306,6 +307,7 @@ func CountriesISO2() map[string]*Country {
 	return m
 }
 
+// CountriesISO3 returns the map of alpha-3 codes to country structs.
 func CountriesISO3() map[string]*Country {
 	if validation_countries_map_alpha3 != nil {
 		return validation_countries_map_alpha3
@@ -319,17 +321,12 @@ func CountriesISO3() map[string]*Country {
 	return m
 }
 
+// ReverseCountries maps the country names to the country structs.
 func ReverseCountries() map[string]*Country {
-
 	m := map[string]*Country{}
-
 	for _, line := range strings.Split(COUNTRY_CSV, "\n")[1:] {
-
 		c := parseCountry(line)
-
 		m[strings.ToLower(c.Name)] = c
-
 	}
-
 	return m
 }
