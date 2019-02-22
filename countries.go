@@ -262,18 +262,21 @@ const 	(
 
 type Country struct {
 	Name string `json:"name"`
-	Code string `json:"code"`
+	Alpha2Code string `json:"code"`
+	Alpha3Code string `json:"code"`
 	Lat float64 `json:"lat"`
 	Lng float64 `json:"lng"`
 	Lang string `json:"lang"`
 }
 
+// parseCountry parses the countries CSV to Country structs
 func parseCountry(s string) *Country {
 
 	cell := strings.Split(s, ",")
 
 	name := strings.TrimSpace(cell[1])
-	code := strings.TrimSpace(cell[2])
+	a2code := strings.TrimSpace(cell[2])
+	a3code := strings.TrimSpace(cell[3])
 	lat, err := strconv.ParseFloat(strings.TrimSpace(cell[5]), 64)
 	if err != nil {
 		panic("FAILED TO PARSE COUNTRY LAT FOR " + s + " (" + err.Error() + ")")
@@ -284,30 +287,35 @@ func parseCountry(s string) *Country {
 	}
 	lang := strings.TrimSpace(cell[7])
 
-	return &Country{name, code, lat, lng, lang}
+	return &Country{name, a2code, a3code, lat, lng, lang}
 }
 
-var validation_countries_map map[string]*Country
+var validation_countries_map_alpha2 map[string]*Country
+var validation_countries_map_alpha3 map[string]*Country
 
-func Countries() map[string]*Country {
-
-	if validation_countries_map != nil {
-		return validation_countries_map
+func CountriesISO2() map[string]*Country {
+	if validation_countries_map_alpha2 != nil {
+		return validation_countries_map_alpha2
 	}
-
 	m := map[string]*Country{}
-
 	for _, line := range strings.Split(COUNTRY_CSV, "\n")[1:] {
-
 		c := parseCountry(line)
-
-		m[c.Code] = c
-
+		m[c.Alpha2Code] = c
 	}
+	validation_countries_map_alpha2 = m
+	return m
+}
 
-	validation_countries_map = m
-	//fmt.Println(m)
-
+func CountriesISO3() map[string]*Country {
+	if validation_countries_map_alpha3 != nil {
+		return validation_countries_map_alpha3
+	}
+	m := map[string]*Country{}
+	for _, line := range strings.Split(COUNTRY_CSV, "\n")[1:] {
+		c := parseCountry(line)
+		m[c.Alpha3Code] = c
+	}
+	validation_countries_map_alpha3 = m
 	return m
 }
 
