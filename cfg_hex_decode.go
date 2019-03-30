@@ -6,8 +6,8 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// Hex returns a validation object that checks for a hex string with a length within optional range
-func Hex(min, max float64) *Config {
+// Returns a validation object that decodes a hex string with a length within optional range
+func HexDecode(min, max float64) *Config {
 
 	config := NewConfig(
 		"0000000000000000000000000000000000000000000000000000000000000000",
@@ -17,12 +17,12 @@ func Hex(min, max float64) *Config {
 
 			if lp < min || lp > max { return req.Respond(400, ERR_RANGE_EXCEED), nil }
 
-			_, err := hex.DecodeString(param)
+			b, err := hex.DecodeString(param)
 			if err != nil {
 				return req.Respond(400, ERR_INVALID_CHARS), nil
 			}
 
-			return nil, param
+			return nil, b
 		},
 		func (req http.Request, param interface{}) (*http.Status, interface{}) {
 
@@ -34,12 +34,12 @@ func Hex(min, max float64) *Config {
 
 			if lp < min || lp > max { return req.Respond(400, ERR_RANGE_EXCEED), nil }
 
-			_, err := hex.DecodeString(s)
+			b, err := hex.DecodeString(s)
 			if err != nil {
 				return req.Respond(400, ERR_INVALID_CHARS), nil
 			}
 
-			return nil, s
+			return nil, b
 		},
 	)
 

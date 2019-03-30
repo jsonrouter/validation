@@ -7,7 +7,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-func TestInt(t *testing.T) {
+func TestHexSHA256(t *testing.T) {
 
 	req := http.NewMockRequest("GET", "/")
 
@@ -15,20 +15,21 @@ func TestInt(t *testing.T) {
 	success := &b
 
 	pathTests := map[string]*bool{
-		"17808779797": success,
+		"000000000000000000000000000000000000000000000000000000000000000000": nil,
+		"00000000000000000000000000000000000000000000000000000000000000000": nil,
+		"0000000000000000000000000000000000000000000000000000000000000000": success,
+		"000000000000000000000000000000000000000000000000000000000000000": nil,
+		"00000000000000000000000000000000000000000000000000000000000000": nil,
+		"": nil,
+		"00": nil,
 		"hello world": nil,
 		"0.1": nil,
 		"67957!464&5": nil,
+		"2": nil,
+		"true": nil,
 	}
 
-	bodyTests := map[interface{}]*bool{
-		17808779797: success,
-		"hello world": nil,
-		0.1: success,
-		"67957!464&5": nil,
-	}
-
-	vc := Int()
+	vc := HexSHA256()
 
 	for test, result := range pathTests {
 
@@ -41,7 +42,7 @@ func TestInt(t *testing.T) {
 
 	}
 
-	for test, result := range bodyTests {
+	for test, result := range pathTests {
 
 		fmt.Println("BODY TESTING:", test)
 
