@@ -5,8 +5,8 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-// ArrayInt returns a validation object that checks for a slice of integers
-func ArrayInt() *Config {
+// ArrayFloat64 returns a validation object that checks for a slice of float64
+func ArrayFloat64() *Config {
 
 	return NewConfig(
 		[]string{},
@@ -23,13 +23,13 @@ func ArrayInt() *Config {
 				return req.Respond(400, ERR_NOT_ARRAY), nil
 			}
 
-			b := make([]int, len(a))
+			b := make([]float64, len(a))
 			for x, item := range a {
 				i, ok := item.(float64)
 				if !ok {
 					return req.Respond(400, ERR_NOT_FLOAT64), nil
 				}
-				b[x] = int(i)
+				b[x] = i
 			}
 
 			return status, b

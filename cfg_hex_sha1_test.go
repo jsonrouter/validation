@@ -1,7 +1,6 @@
 package validation
 
 import (
-	"fmt"
 	"testing"
 	//
 	"github.com/jsonrouter/core/http"
@@ -33,27 +32,21 @@ func TestHexSHA1(t *testing.T) {
 
 	for test, result := range pathTests {
 
-		fmt.Println("PATH TESTING:", test)
-
 		if status, _ := vc.PathFunction(req, test); (result == nil && status == nil) || (result != nil && status != nil) {
 
 			t.Error("FAILED")
+			t.Fail()
 		}
 
 	}
 
 	for test, result := range pathTests {
 
-		fmt.Println("BODY TESTING:", test)
-
 		if status, _ := vc.BodyFunction(req, test); (result == nil && status == nil) || (result != nil && status != nil) {
 
-			fmt.Println("FAILED", result, status)
-
 			t.Error("FAILED")
+			t.Fail()
 		}
-
-		fmt.Println("PASSED", test)
 
 	}
 }

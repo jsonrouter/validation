@@ -7,7 +7,7 @@ import (
 	"github.com/jsonrouter/core/http"
 )
 
-func TestArrayInt(t *testing.T) {
+func TestArrayFloat(t *testing.T) {
 
 	req := http.NewMockRequest("GET", "/")
 
@@ -49,7 +49,7 @@ func TestArrayInt(t *testing.T) {
 		success,
 	}
 
-	vc := ArrayInt()
+	vc := ArrayFloat64()
 
 	for i, result := range bodyResults {
 
