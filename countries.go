@@ -257,7 +257,8 @@ const 	(
 ,Yemen,YE,YEM,Middle East,15.552727,48.516388,AR,,,,887,967,,,,
 ,Zambia,ZM,ZMB,Africa,-13.133897,27.849332,EN,,,,894,260,,,,
 ,Zimbabwe,ZW,ZWE,Africa,-19.015438,29.154857,EN,,,,716,263,,,,
-,Aland Islands,AX,ALA,Europe,60.178525,19.915610,SV,,,,248,358,,,,`
+,Aland Islands,AX,ALA,Europe,60.178525,19.915610,SV,,,,248,358,,,,
+,Test Country,XX,XXX,Antestica,0.0,0.1,EN,,,,248,358,,,,`
 		)
 
 type Country struct {
