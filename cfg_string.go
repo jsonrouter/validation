@@ -15,14 +15,14 @@ func checkString(req http.Request, min, max float64, s string) (*http.Status, st
 	if length < int(min) {
 		return req.Respond(
 			400,
-			fmt.Sprintf("%s: min (%d)", ERR_RANGE_EXCEED, length),
+			fmt.Sprintf("%s: min (%d/%d)", ERR_RANGE_EXCEED, length, int(min)),
 		), ""
 	}
 
 	if length > int(max) {
 		return req.Respond(
 			400,
-			fmt.Sprintf("%s: max (%d)", ERR_RANGE_EXCEED, length),
+			fmt.Sprintf("%s: max (%d/%d)", ERR_RANGE_EXCEED, length, int(max)),
 		), ""
 	}
 

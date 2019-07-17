@@ -19,9 +19,10 @@ func TestStringSet(t *testing.T) {
 		"hello": success,
 		"world": success,
 		"hello world": nil,
+		"again": success,
 	}
 
-	vc := StringSet("hello", "world")
+	vc := StringSet("hello", "world", "again")
 
 	for test, result := range tests {
 
